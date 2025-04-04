@@ -1,0 +1,196 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="container-fluid" style="margin-top: 1%">
+                <div class="card text-center">
+                    <div class="card-header" style="background-color: darkseagreen">
+                        <h2>Configura i tuoi parametri di produzione</h2>
+                    </div>
+                    <div class="card-body">
+                        <table id="data" class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Tipologia</th>
+                                <th>Tempo</th>
+                                <th>Azioni</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for parametroProduzione in parametriProduzione %}
+                                <tr>
+                                <td>{{ parametroProduzione.tipologia }}</td>
+                                <td>{{ parametroProduzione.tempoElaborazione }}</td>
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#edit{{parametroProduzione._id}}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                            </svg>
+                                        </button>
+                    
+                                        <form action="{{ url_for('eliminaParametriProduzione', oid=parametroProduzione._id)}}" method="POST" class="btn-group">
+                                            <button type="submit" class="btn btn-outline-danger">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                                </tr>
+                                <!-- Modal -->
+                                <div class="modal fade" id="edit{{parametroProduzione._id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">   
+                                        <div class="modal-content">
+                                            <form name="ins_box_form" style="margin-top: 2%" action="{{url_for('modificaParametriProduzione', oid=parametroProduzione._id)}}" method="POST" role="form">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Modifica parametro produzione</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-floating mb-3">
+                                                        <input type="text" class="form-control" name="tipologia" placeholder="name@example.com" value="{{parametroProduzione.tipologia}}">
+                                                        <label for="floatingInput">Tipologia</label>
+                                                    </div>
+                                                    <div class="form-floating mb-3">
+                                                        <input type="int" class="form-control" name="tempoElaborazione" placeholder="name@example.com" value="{{parametroProduzione.tempoElaborazione}}">
+                                                        <label for="floatingInput">Tempo</label>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                                                    <input type="submit" value="Modifica il tuo parametro produzione" class="btn btn-outline-success">
+                                                </div>
+                                            </form>  
+                                        </div>
+                                    </div>    
+                                </div>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="container-fluid" style="margin-top: 1%">
+                <div class="card text-center">
+                    <div class="card-header" style="background-color: darkseagreen">
+                        <h2>Configura i tuoi parametri di manutenzione</h2>
+                    </div>
+                    <div class="card-body">
+                        <table id="data" class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Tipologia</th>
+                                <th>Tempo</th>
+                                <th>Tempo alla prossima manutenzione</th>
+                                <th>Azioni</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for parametroManutenzione in parametriManutenzione %}
+                                <tr>
+                                <td>{{ parametroManutenzione.tipologia }}</td>
+                                <td>{{ parametroManutenzione.tempoElaborazione }}</td>
+                                <td>{{ parametroManutenzione.tempoRestante}}</td>
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#edit{{parametroManutenzione._id}}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                            </svg>
+                                        </button>
+                                        <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#effettuaManutenzione{{parametroManutenzione._id}}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-square" viewBox="0 0 16 16">
+                                                <path d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5z"/>
+                                                <path d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0"/>
+                                            </svg>
+                                        </button>
+                    
+                                        <form action="{{ url_for('eliminaParametriManutenzione', oid=parametroManutenzione._id)}}" method="POST" class="btn-group">
+                                            <button type="submit" class="btn btn-outline-danger">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                                </tr>
+                                <!-- Modal -->
+                                <div class="modal fade" id="edit{{parametroManutenzione._id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">   
+                                        <div class="modal-content">
+                                            <form name="ins_box_form" style="margin-top: 2%" action="{{url_for('modificaParametriManutenzione', oid=parametroManutenzione._id)}}" method="POST" role="form">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Modifica parametro produzione</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-floating mb-3">
+                                                        <input type="text" class="form-control" name="tipologia" placeholder="name@example.com" value="{{parametroManutenzione.tipologia}}">
+                                                        <label for="floatingInput">Tipologia</label>
+                                                    </div>
+                                                    <div class="form-floating mb-3">
+                                                        <input type="int" class="form-control" name="tempoElaborazione" placeholder="name@example.com" value="{{parametroManutenzione.tempoElaborazione}}">
+                                                        <label for="floatingInput">Tempo</label>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                                                    <input type="submit" value="Modifica il tuo parametro produzione" class="btn btn-outline-success">
+                                                </div>
+                                            </form>  
+                                        </div>
+                                    </div>    
+                                </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="effettuaManutenzione{{parametroManutenzione._id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">   
+                                        <div class="modal-content">
+                                            <form name="ins_box_form" style="margin-top: 2%" action="{{url_for('effettuaManutenzione', oid=parametroManutenzione._id)}}" method="POST" role="form">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Confermi di aver effettuato la manutenzione?</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-floating mb-3">
+                                                        <input type="text" class="form-control" name="tipologia" placeholder="name@example.com" value="{{parametroManutenzione.tipologia}}" disabled>
+                                                        <label for="floatingInput">Tipologia</label>
+                                                    </div>
+                                                    <div class="form-floating mb-3">
+                                                        <input type="int" class="form-control" name="tempoElaborazione" placeholder="name@example.com" value="{{parametroManutenzione.tempoElaborazione}}" disabled>
+                                                        <label for="floatingInput">Tempo</label>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">No</button>
+                                                    <input type="submit" value="Confermo" class="btn btn-outline-success">
+                                                </div>
+                                            </form>  
+                                        </div>
+                                    </div>    
+                                </div>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+   
+
+    
+    
+{% endblock %}
+

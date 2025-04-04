@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-6 mb-4">
+        <div class="container-fluid" style="margin-top: 1%">
+            <div class="card text-center">
+                <div class="card-header" style="background-color: darkseagreen">
+                    <h2>Inserisci i parametri di produzione</h2>
+                </div>
+                <div class="card-body">
+                    <form name="ins_box_form" style="margin-top: 2%" method="POST" role="form">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="tipologia" placeholder="name@example.com">
+                            <label for="floatingInput">Tipologia</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="int" class="form-control" name="tempoElaborazione" placeholder="name@example.com">
+                            <label for="floatingInput">Tempo</label>
+                        </div>
+                        <input type="submit" value="Carica i tuoi parametri" class="btn btn-outline-success btn-lg">
+                        <br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 mb-4">
+        <div class="container-fluid" style="margin-top: 1%">
+            <div class="card text-center">
+                <div class="card-header" style="background-color: darkseagreen">
+                    <h2>Inserisci i parametri della manutenzione</h2>
+                </div>
+                <div class="card-body">
+                    <form name="ins_box_form" style="margin-top: 2%" action="{{url_for('inserisciManutenzione')}}" method="POST" role="form">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="tipologia" placeholder="name@example.com" value="">
+                                <label for="floatingInput">Tipologia manutenzione</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="int" class="form-control" name="tempoElaborazione" placeholder="name@example.com" value="">
+                                <label for="floatingInput">Tempo</label>
+                            </div>
+                            <input type="submit" value="Carica i tuoi parametri" class="btn btn-outline-success btn-lg">
+        
+                    </form>  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock %}

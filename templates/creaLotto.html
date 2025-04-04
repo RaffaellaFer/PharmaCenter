@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container-fluid" style="margin-top: 1%">
+        <div class="card text-center">
+            <!--<div class="card-header" style="background-color: darkseagreen">
+                <h2>Inserisci i parametri della manutenzione</h2>
+            </div>-->
+            <div class="card-body">
+                <div class="container">
+                    {% with errors = get_flashed_messages(category_filter=["error"]) %}
+                    {% if errors %}
+                    <div class="alert alert-danger alert-dismissible fade show"
+                        role="alert">
+                        <ul>
+                            {%- for msg in errors %}
+                            <li>{{ msg }}</li>
+                            {% endfor -%}
+                        </ul>
+            
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                    </div>
+                    {% endif %}
+                    {% endwith %}
+            
+                    {% with messages = get_flashed_messages(category_filter=["success"]) %}
+                    {% if messages %}
+                    <div class="alert alert-success alert-dismissible fade show"
+                        role="alert">
+                        <ul>
+                            {%- for msg in messages %}
+                            <li>{{ msg }}</li>
+                            {% endfor -%}
+                        </ul>
+            
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                    </div>
+                    {% endif %}
+                    {% endwith %}
+                </div>
+                <form method="POST" action="/controlli_creazione_lotto">
+                    <table id="data" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Tipologia</th>
+                            <th>Tempo</th>
+                            <th>Quantità</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for farmaco in farmaci %}
+                            <tr>
+                            <td>{{ farmaco.nome }}</td>
+                            <td>{{ farmaco.tipologia }}</td>
+                            <td>{{ farmaco.tempoElaborazione }}</td>
+                            <td>
+                                <div class="form-floating mb-3">
+                                    <input type="number" name="quantita_{{ farmaco._id }}" value="{{ farmaco.quantita }}">
+                                </div>
+                            </td>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-outline-success">Crea lotto</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    
+
+{% endblock %}
+

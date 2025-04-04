@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- First Container -->
+<div class="container-fluid bg-1 text-center" style="margin-top: 1%">
+    <div class="card text-center">
+        <!--<div class="card-header" style="background-color: darkseagreen">
+            <h2>Inserisci i parametri della manutenzione</h2>
+        </div>-->
+        <div class="card-body">
+            <div class="container-fluid bg-1 text-center">
+                <h3 class="margin">Cos'è PharmaCenter?</h3>
+                <img src="{{ url_for('static', filename='images/Logo.jpg') }}" class="img-responsive margin" style="width:20%" alt="Logo">
+                <p>Pharma Center è un'applicazione progettata per ottimizzare l'efficienza operativa della tua azienda farmaceutica. Con le sue caratteristiche e un’interfaccia chiara e intuitiva, questa piattaforma ti permette di rivoluzionare la gestione della tua attività, rendendola più moderna e performante.</p>
+              </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid bg-1 text-center" style="margin-top: 1%">
+    <div class="card text-center">
+        <!--<div class="card-header" style="background-color: darkseagreen">
+            <h2>Inserisci i parametri della manutenzione</h2>
+        </div>-->
+        <div class="card-body">
+<!-- Third Container (Grid) -->
+<div class="container-fluid bg-2 text-center" style="padding-bottom: 70px;">    
+    <h3 class="margin">Quali sono le sue funzionalità?</h3><br>
+    <div class="row">
+      <div class="col-sm-6">
+        <p>Creazione del prodotto e definizione delle caratteristiche: Inserisci i dettagli dei farmaci da produrre con semplicità, inserendo nome, tipologia e tempi di produzione del farmaco.
+            Avrai accesso ad una tabella che mostrerà l’elenco completo dei farmaci inseriti, avendo sempre la possibilità di modificare o eliminare ogni campo.</p>
+        <img src="{{ url_for('static', filename='images/CreaFarmaco.png') }}" class="img-responsive margin" style="width:60%" alt="CreaFarmaco">
+      </div>
+      <div class="col-sm-6"> 
+        <p>Configurazione flessibile dei parametri di produzione: Configura i parametri essenziali per una produzione senza sprechi e visualizza tutto in tabelle interattive.  Personalizza gli aspetti fondamentali andando a definire i tempi di lavorazione, la capacità massima giornaliera sia per ogni tipologia di prodotto che per la produzione complessiva. Inoltre ogni informazione potrà essere aggiornata o eliminata con un semplice tocco, garantendo flessibilità e precisione.</p>
+        <img src="{{ url_for('static', filename='images/ParametriConfigurazione.png') }}" class="img-responsive margin" style="width:60%" alt="ParametriConfigurazione">
+      </div>
+  </div>
+  <br><br>
+  <div class="row">
+    <div class="col-sm-6"> 
+      <p>Gestione della manutenzione: Un sistema ben mantenuto riduce al minimo i tempi di inattività e limita eventuali guasti. Per tale motivo la manutenzione è un elemento fondamentale per il successo di un’azienda. Imposta vari tipi di manutenzione in base alle esigenze della tua azienda. Definisci un limite massimo di produzione dopo il quale sarà necessario effettuarla e visualizza il tempo restante al prossimo intervento. In caso di superamento del limite impostato, il sistema ti notificherà tramite un pop-up che sarà necessario effettuare la manutenzione, prima di proseguire con la produzione.</p>
+      <img src="{{ url_for('static', filename='images/Manutenzione.png') }}" class="img-responsive margin" style="width:60%" alt="Manutenzione">
+    </div>
+    <div class="col-sm-6"> 
+      <p>Gestisci i tuoi lotti con facilità: Monitora lo stato di avanzamento in tempo reale. Saprai sempre se un lotto è in corso o completato.</p>
+      <img src="{{ url_for('static', filename='images/VisualizzaLotti.png') }}" class="img-responsive margin" style="width:60%" alt="VisualizzaLotti">
+    </div>
+  </div>
+</div>
+    </div>
+</div>
+
+
+  <!-- Footer -->
+  <footer class="container-fluid bg-3 text-center">
+    <p>PharmaCenter Made By <a href="https://www.w3schools.com">Raffaella Ferrara</a></p> 
+  </footer>
+
+{% endblock %}
